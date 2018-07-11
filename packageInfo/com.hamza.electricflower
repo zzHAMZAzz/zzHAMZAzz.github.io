@@ -1,0 +1,9 @@
+{
+	"name": "ElectricFlower - XenHTML",
+	"desc_short": "ElectricFlower widget for XenHTML",
+	"desc_long": "ElectricFlower from WebGLSamples.org now available as a wallpaper using XenHTML",
+	"compatitle": "iOS 11",
+	"changelog": "<strong>1.0</strong><br>Initial Release.<br>",
+	"screenshot": "<div style='text-align:center;'><a href='https://media.giphy.com/media/1yTehIyRXwaux3KJ4Z/giphy.gif' target='_blank'><img width=95% src='https://media.giphy.com/media/1yTehIyRXwaux3KJ4Z/giphy.gif'/></a><br></div>",
+	"open": true,
+}

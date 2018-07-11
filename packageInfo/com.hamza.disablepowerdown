@@ -1,0 +1,9 @@
+{
+	"name": "DisablePowerDown",
+	"desc_short": "Disables Power Down Menu",
+	"desc_long": "Disables power down menu in favour of staying in jailbroken mode",
+	"compatitle": null,
+	"changelog": "<strong>1.0</strong><br>+ Initial Release.<br>",
+	"screenshot": null,
+	"open": true,
+}
