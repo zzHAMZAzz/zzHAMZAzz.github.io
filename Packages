@@ -5,7 +5,8 @@ Section: Tweaks
 Maintainer: Hamza
 Depends: mobilesubstrate
 Filename: ./com.hamza.disablepowerdown_1.0_iphoneos-arm.deb
-Size: 3000
+Size: 3054
+MD5: 32db7ee84be08b45e545f5d9380e0877
 Homepage: https://zzhamza.github.io
 Description: Disables power menu in favour of staying in jailbreak mode
 Name: DisablePowerDown
