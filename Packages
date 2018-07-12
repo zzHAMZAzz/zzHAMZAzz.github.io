@@ -19,7 +19,8 @@ Section: XenHTML
 Maintainer: Hamza
 Depends: mobilesubstrate, com.matchstic.xenhtml
 Filename: ./com.hamza.electricflower_1.0_iphoneos-arm.deb
-Size: 48000
+Size: 47904
+MD5: c05fd311404c098e6008d349934ceec4
 Homepage: https://zzhamza.github.io
 Description: ElectricFlower widget for XenHTML
 Name: ElectricFlower - XenHTML
