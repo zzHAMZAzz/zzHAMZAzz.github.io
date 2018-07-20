@@ -1,0 +1,3 @@
+I should've mentioned this ealier, this repo is based / an edited mirror of Julioverne's repo since i never expected to release any tweaks, and i was interested in house it worked with the javascript.
+
+julioverne repo: http://julioverne.github.io/
