@@ -30,7 +30,7 @@ Depiction: http://zzhamzazz.github.io/description.html?id=com.hamza.electricflow
 
 Package: com.hamza.sadmacsafemode
 Architecture: iphoneos-arm
-Version: 1.1.1
+Version: 1.1.2
 Section: Tweaks
 Maintainer: Hamza
 Depends: com.ex.libsubstitute, org.coolstar.tweakinject
