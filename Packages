@@ -36,7 +36,7 @@ Maintainer: Hamza
 Depends: com.ex.libsubstitute, org.coolstar.tweakinject
 Filename: ./com.hamza.sadmacsafemode_1.0_iphoneos-arm.deb
 Size: 16020
-MD5: d0fc5aa4daba86aefd5c63898111f44b
+MD5Sum: d0fc5aa4daba86aefd5c63898111f44b
 Homepage: https://zzhamza.github.io
 Description: Changes the Electra Safe Mode icon to a Sad Mac!
 Name: Sad Mac for SafeMode
