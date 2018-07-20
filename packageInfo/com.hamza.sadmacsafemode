@@ -1,9 +1,15 @@
 {
 	"name": "Sad Mac for SafeMode",
 	"desc_short": "Changes the Electra Safe Mode icon to a Sad Mac!",
-	"desc_long": "Changes the Electra Safe Mode icon to a Sad Mac!",
+	"desc_long": "Many people wanted the Sad Mac icon instead of the Sad iPhone icon, so here it is :D
+	
+	It's my first actual tweak release, and also my first time using postinst and postrm which was cool.
+	
+	Technically, when you install, it will keep the original icons in the same directory. When you uninstall, it will the Sad Mac will remove itself and bring the Sad iPhone back into place. 
+	
+	Although installing and removing works as planned, it's probably a better idea to uninstall this when a new safemode update is released, then re-install this again, just to be safe",
 	"compatitle": "iOS 11",
 	"changelog": "<strong>1.0</strong><br>Initial Release.<br><p><strong>1.1</strong><br>create postinst and postrm<br><p><strong>1.1.1</strong><br>changed postrm into prerm, should be good now<br><p><strong>1.1.2</strong><br>1.1.1 wasn't good enough, this should be a final version<br>",
-	"screenshot": "<div style='text-align:center;'><a href='https://i.imgur.com/VQ7TJka.png' target='_blank'><img width=95% src='https://i.imgur.com/VQ7TJka.png'/></a><br></div>",
+	"screenshot": "<div style='text-align:center;'><a href='https://i.imgur.com/VQ7TJka.png' target='_blank'><img width=50% src='https://i.imgur.com/VQ7TJka.png'/></a><br></div>",
 	"open": true,
 }
