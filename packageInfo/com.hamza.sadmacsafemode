@@ -3,7 +3,7 @@
 	"desc_short": "Changes the Electra Safe Mode icon to a Sad Mac!",
 	"desc_long": "Changes the Electra Safe Mode icon to a Sad Mac!",
 	"compatitle": "iOS 11",
-	"changelog": "<strong>1.0</strong><br>Initial Release.<br>",
+	"changelog": "<strong>1.0</strong><br>Initial Release.<br><p><strong>1.1</strong><br>create postinst and postrm<br>",
 	"screenshot": "<div style='text-align:center;'><a href='https://i.imgur.com/VQ7TJka.png' target='_blank'><img width=95% src='https://i.imgur.com/VQ7TJka.png'/></a><br></div>",
 	"open": true,
 }
