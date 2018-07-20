@@ -30,13 +30,13 @@ Depiction: http://zzhamzazz.github.io/description.html?id=com.hamza.electricflow
 
 Package: com.hamza.sadmacsafemode
 Architecture: iphoneos-arm
-Version: 1.0
+Version: 1.1
 Section: Tweaks
 Maintainer: Hamza
 Depends: com.ex.libsubstitute, org.coolstar.tweakinject
-Filename: ./com.hamza.sadmacsafemode_1.0_iphoneos-arm.deb
-Size: 16020
-MD5Sum: d0fc5aa4daba86aefd5c63898111f44b
+Filename: ./com.hamza.sadmacsafemode_1.1_iphoneos-arm.deb
+Size: 16116
+MD5Sum: 7183836ed28fda09f9b27782b8e63f2f
 Homepage: https://zzhamza.github.io
 Description: Changes the Electra Safe Mode icon to a Sad Mac!
 Name: Sad Mac for SafeMode
