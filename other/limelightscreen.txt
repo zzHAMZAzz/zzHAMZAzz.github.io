@@ -1,0 +1,43 @@
+<style>
+body {
+    background-color: black
+}
+</style>
+
+<div id="contentframe" style="position:relative; top: 0px; left: 0px;">
+<iframe height="299" width="557" src="//www.youtube.com/embed/*ENTERVIDEOID*?enablejsapi=1&autoplay=0&showinfo=0&controls=0" frameborder="0" autoplay="0" allowfullscreen id="video"></iframe>
+
+<p id="demo"></p>
+
+<p id="playstatus"></p>
+
+
+
+<script>
+
+var player;
+
+function onYouTubePlayerAPIReady() {
+
+  player = new YT.Player('video', {
+    events: {
+      'onReady': onPlayerReady
+    }
+  });
+}
+
+function onPlayerReady(event) {
+  iframe = $('#player');
+
+  
+}
+
+
+// Inject YouTube API script
+var tag = document.createElement('script');
+tag.src = "//www.youtube.com/player_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+</script>
+</div>
