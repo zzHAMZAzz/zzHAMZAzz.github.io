@@ -1,4 +1,4 @@
-Last Updated by Hamza @ 23:52
+Last Updated by Hamza @ 23:57
 <!-- head section -->
 <!-- skin -->
 <link rel="stylesheet" href="https://releases.flowplayer.org/7.2.7/skin/skin.css">
@@ -11,6 +11,16 @@ Last Updated by Hamza @ 23:52
 <div id="player"></div>
 
 <script>
+        
+flowplayer(function (api, root) {
+  var fsbutton = root.querySelector(".fp-fullscreen");
+ 
+  // append fullscreen button after HD menu is added on ready
+  api.on("ready", function () {
+    root.querySelector(".fp-controls").appendChild(fsbutton);
+  });
+});
+ 
         flowplayer('#player', {
             live: true,  // set if it's a live stream
             ratio: 9/16, // set the aspect ratio of the stream
@@ -21,4 +31,6 @@ Last Updated by Hamza @ 23:52
                 ]
             }
         });
+        
+      
 </script>
