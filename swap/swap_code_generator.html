@@ -1,0 +1,207 @@
+﻿<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link href="css/fontawesome.min.css" rel="stylesheet">
+		<link href="css/solid.min.css" rel="stylesheet">
+		<title>VW MIB2 Technisat FEC/SWaP Code Generator</title>
+		<style>input[id=vin]{margin-bottom:-1px;border-bottom-right-radius:0;border-bottom-left-radius:0}input[id=vcrn]{margin-bottom:10px;border-top-left-radius:0;border-top-right-radius:0}.table-sm td,.table-sm th{padding:.2rem}</style>
+	</head>
+	<body class="bg-light">
+		<div class="container p-5">
+			<div class="row">
+				<div class="col">
+					<form class="mx-auto w-75">
+						<h1 class="h3 mb-4 font-weight-normal">VW MIB2 Technisat FEC/SWaP Code Generator</h1>
+						
+						<input type="text" id="vin" class="form-control" placeholder="VIN" required="" autofocus="" maxlength="17" size="17" value="VIN              ">
+						<input type="text" id="vcrn" class="form-control mb-4" placeholder="VCRN" required="" maxlength="10" size="10" value="A8436BB7C5">
+						
+						<table class="table table-sm table-borderless table-hover" style="height: 100px;">
+							<thead>
+								<tr>
+									<th scope="col">Code</th>
+									<th scope="col">CM</th>
+									<th scope="col">DM</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00030000 - AMI (USB)" value="00030000">00030000 - AMI (USB)</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>							
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00030001 - Gracenote" value="00030001">00030001 - Gracenote</label>
+										</div>
+									</td>
+									<td class="align-middle"></td>
+									<td class="align-middle"></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00040100 - Navigation" value="00040100">00040100 - Navigation</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-times text-danger"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00050000 - Bluetooth" value="00050000">00050000 - Bluetooth</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00060100 - Vehicle Data Interface" value="00060100">00060100 - Vehicle Data Interface</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00060200 - Infotaiment Control (Car-Net)" value="00060200">00060200 - Infotaiment Control (Car-Net)</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00060300 - Mirror Link" value="00060300">00060300 - Mirror Link</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00060400 - Performance monitor (Sport HMI)" value="00060400">00060400 - Performance monitor (Sport HMI)</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00060800 - Apple CarPlay" value="00060800">00060800 - Apple CarPlay</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00060900 - Google Automotive Link" value="00060900">00060900 - Google Automotive Link</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00060B00 - ??????????" value="00060B00">00060B00 - ??????????</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+									<td class="align-middle"><i class="fas fa-times text-danger"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00070100 - SDS (Voice Activation)" value="00070100">00070100 - SDS (Voice Activation)</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+									<td class="align-middle"><i class="fas fa-times text-danger"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00070200 - SDS for Nav (Voice Activation with Navigation)" value="00070200">00070200 - SDS for Nav (Voice Activation with Navigation)</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-times text-danger"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="00070400 - Electronic voice amplifier driver" value="00070400">00070400 - Electronic voice amplifier driver</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="074000FF - ??????????" value="074000FF">074000FF - ??????????</label>
+										</div>
+									</td>
+									<td class="align-middle"></td>
+									<td class="align-middle"></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="09400008 - Maps EU" value="09400008">09400008 - Maps EU</label>
+										</div>
+									</td>
+									<td class="align-middle"><i class="fas fa-times text-danger"></i></td>
+									<td class="align-middle"><i class="fas fa-check text-success"></i></td>
+								</tr>
+								<tr>
+									<td class="align-middle">
+										<div class="checkbox">
+											<label class="m-0"><input type="checkbox" class="mr-2" name="094000FF - Maps All?" value="094000FF">094000FF - Maps All?</label>
+										</div>
+									</td>
+									<td class="align-middle"></td>
+									<td class="align-middle"></td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+
+				<div class="col">
+					<div class="row">
+						<div class="col"><div class="alert alert-success" id="avin" role="alert">VIN status: <b>OK</b></div></div>
+						<div class="col"><div class="alert alert-success" id="avcrn" role="alert">VCRN status: <b>OK</b></div></div>
+					</div>
+					<div class="jumbotron">
+						<h1>No codes selected.</h1>
+						<p class="lead">Please select at least one of the available codes.</p>
+					</div>
+					<div id="codes"></div>
+					<footer class="container"><hr><p class="text-muted">© StrSerg, EvaldasL, SenatorBy</p></footer>
+				</div>
+			</div>
+		</div> 
+		<script src="js/jquery-3.4.1.slim.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script>var e=Math.floor((new Date).getTime()/1e3),t=[],s=0,n="<div class='form-group'><label class='font-weight-bold'>",a="</label><textarea class='form-control h-100' readonly='readonly' onclick='this.select()' onfocus='this.select()'>1102",l="0000000000000000003B0FC769BFFF15ECD445B8196D2203D6D56BD8F22748B37D68F863DAC57E23C90A5FEEF0C06394C8D48A2EAA4F0FB658557400E66441DDC7D5AC3610AA4D45056C0C6E17C7E4B60C40E52FFA891938AF186ED20AE83A99EB10F3088479E6CBD2770C1563B5AE235B440BEF16EBE696576E108F2F9F897D963DEFBAD3ABDF2FFE",o="</textarea></div>";function r(e,t,s,n){e==t?$("#"+s).removeClass("alert-danger").addClass("alert-success").html(n+" status: <b>OK</b>"):e>0&&e<t?$("#"+s).removeClass("alert-success").addClass("alert-danger").html(n+" should be "+t+" length size! <b>"+e+"/"+t+"</b>").show():$("#"+s).removeClass("alert-success").addClass("alert-danger").html(n+" input could not be empty!").show()}function i(){for(var s=0;s<t.length;s++)t[s].visible&&$("#codes").append(n+t[s].name+a+t[s].code+"03"+t[s].vcrn.toUpperCase()+h(t[s].vin).toUpperCase()+"00"+e.toString(16).toUpperCase()+l+o)}function c(e,t){for(var s=0;s<e.length;s++)if(e[s].code==t)return!0;return!1}function h(e){for(var t=[],s=0,n=e.length;s<n;s++){var a=Number(e.charCodeAt(s)).toString(16);t.push(a)}return t.join("")}$("#vin").keyup(function(){$("#codes").html("");for(var e=0;e<t.length;e++)t[e].vin=this.value;r(this.value.length,17,"avin","VIN"),i()}),$("#vcrn").keyup(function(){$("#codes").html("");for(var e=0;e<t.length;e++)t[e].vcrn=this.value;r(this.value.length,10,"avcrn","VCRN"),i()}),$(".checkbox input").change(function(){if($("#codes").html(""),this.checked){if(c(t,this.value))for(var e=0;e<t.length;e++)t[e].code==this.value&&(t[e].visible=!0);else t.push({code:this.value,vcrn:$("#vcrn").val(),vin:$("#vin").val(),visible:!0,name:this.name});s++}else{for(e=0;e<t.length;e++)t[e].code==this.value&&(t[e].visible=!1);s--}s>0?$(".jumbotron").hide():$(".jumbotron").show(),i()});</script>
+	</body>
+</html>
