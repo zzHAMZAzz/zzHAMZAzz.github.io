@@ -89,9 +89,14 @@
         });
 
         function openLightbox(imageSrc) {
-            document.getElementById("lightbox-img").src = imageSrc;
-            document.getElementById("lightbox").style.display = "flex";
-        }
+    // Remove the `&width=200` query parameter from the image URL
+    const fullImageSrc = imageSrc.replace(/&width=200$/, '');
+    document.getElementById("lightbox-img").src = fullImageSrc;
+    document.getElementById("lightbox").style.display = "flex";
+}
+
+
+
 
         function closeLightbox() {
             document.getElementById("lightbox").style.display = "none";
