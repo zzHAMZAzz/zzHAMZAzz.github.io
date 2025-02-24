@@ -13,12 +13,48 @@
         <input type="text" placeholder="Enter Reg..." id="regfield" />
         <button id="myBtn">Go</button>
     </ul>
+    <div id="imageResults"></div>
 
     <script>
-        document.getElementById("myBtn").addEventListener("click", function(){
-            var url = document.getElementById("regfield").value;
-            var link = "https://www.bcaimage.com/images/" + url + "-gb/beauty,damage";
-            window.open(link);
+        document.getElementById("myBtn").addEventListener("click", async function(){
+            var reg = document.getElementById("regfield").value;
+            if (!reg) return alert("Please enter a registration number.");
+            
+            var url = `https://www.bcaimage.com/images/${reg}-gb/beauty,damage`;
+            
+            try {
+                const response = await fetch(url);
+                const htmlText = await response.text();
+
+                // Parse HTML and extract image data
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, "text/html");
+                const gallery = doc.querySelector(".gallery");
+                const images = gallery ? gallery.querySelectorAll(".thumbnail") : [];
+                
+                let outputHTML = "<div style='display:flex;flex-wrap:wrap;gap:10px;'>";
+                images.forEach(img => {
+                    const imgTag = img.querySelector("a img");
+                    const dateTag = img.querySelector("span span");
+                    
+                    if (imgTag && dateTag) {
+                        const imgSrc = imgTag.getAttribute("src");
+                        const dateText = dateTag.textContent.trim();
+                        outputHTML += `
+                            <div style='text-align:center;'>
+                                <img src="${imgSrc}" style="width:200px;border-radius:8px;"/>
+                                <p><strong>${dateText}</strong></p>
+                            </div>
+                        `;
+                    }
+                });
+                outputHTML += "</div>";
+
+                document.getElementById("imageResults").innerHTML = outputHTML || "<p>No images found.</p>";
+            } catch (error) {
+                console.error("Error fetching images:", error);
+                document.getElementById("imageResults").innerHTML = "<p>Failed to load images.</p>";
+            }
         });
     </script>
 
@@ -31,64 +67,63 @@
 
     <script>
         function executeCurl() {
-    const inputValue = document.getElementById("inputText").value;
-    const outputElement = document.getElementById("output");
+            const inputValue = document.getElementById("inputText").value;
+            const outputElement = document.getElementById("output");
 
-    if (!inputValue) {
-        outputElement.textContent = "⚠️ Please enter a VRM.";
-        return;
-    }
+            if (!inputValue) {
+                outputElement.textContent = "⚠️ Please enter a VRM.";
+                return;
+            }
 
-    const apiUrl = "https://crm.syc2j.com/api/vehicle-details";
+            const apiUrl = "https://crm.syc2j.com/api/vehicle-details";
 
-    const requestData = {
-        VRM: inputValue
-    };
+            const requestData = { VRM: inputValue };
 
-    fetch(apiUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(requestData)
-    })
-    .then(async response => {
-        if (response.status === 429) {
-            throw new Error("❌ Too many attempts, try again later.");
+            fetch(apiUrl, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestData)
+            })
+            .then(async response => {
+                if (response.status === 429) {
+                    throw new Error("❌ Too many attempts, try again later.");
+                }
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data?.msg !== "Vehicle Found") {
+                    throw new Error(`API error: ${data?.msg || "Unknown error"}`);
+                }
+
+                const vin = data?.data?.vehicleDVLAData?.DATA?.DVLA?.VIN;
+                const plate = data?.data?.vehicleDVLAData?.DATA?.CAP?.PLATE;
+                const motMileage = data?.data?.mot_mileage;
+
+                if (!vin || !plate || !motMileage) {
+                    throw new Error("Some required data is missing.");
+                }
+
+                outputElement.innerHTML = `
+                    ✅ VIN: ${vin}<br>
+                    ${plate} <br>
+                    <strong>Last Mileage:</strong> ${motMileage}
+                `;
+            })
+            .catch(error => {
+                outputElement.textContent = error.message;
+            });
         }
-        if (!response.ok) {
-            throw new Error(`Server error: ${response.status} ${response.statusText}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data?.msg !== "Vehicle Found") {
-            throw new Error(`API error: ${data?.msg || "Unknown error"}`);
-        }
-
-        const vin = data?.data?.vehicleDVLAData?.DATA?.DVLA?.VIN;
-        const plate = data?.data?.vehicleDVLAData?.DATA?.CAP?.PLATE;
-        const manufacturer = data?.data?.vehicleDVLAData?.DATA?.CAP?.MANUFACTURER;
-        const model = data?.data?.vehicleDVLAData?.DATA?.CAP?.MODEL;
-        const motMileage = data?.data?.mot_mileage;
-
-        if (!vin || !plate || !manufacturer || !model || !motMileage) {
-            throw new Error("Some required data is missing.");
-        }
-
-        outputElement.innerHTML = `
-            ✅ VIN: ${vin}<br>
-            ${plate} ${manufacturer} ${model} <br>
-            <strong>Last Mileage:</strong> ${motMileage}
-        `;
-    })
-    .catch(error => {
-        outputElement.textContent = error.message;
-    });
-}
     </script>
 
-<div align='center'><a href='https://www.free-website-hit-counter.com'><img src='https://www.free-website-hit-counter.com/zc.php?d=5&id=5858&s=55' border='0' alt='Free Website Hit Counter'></a><br /></div>
+    <div align='center'>
+        <a href='https://www.free-website-hit-counter.com'>
+            <img src='https://www.free-website-hit-counter.com/zc.php?d=5&id=5858&s=55' border='0' alt='Free Website Hit Counter'>
+        </a>
+        <br />
+    </div>
 
 </body>
 </html>
