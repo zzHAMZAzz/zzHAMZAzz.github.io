@@ -1,168 +1,258 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Hamza's GitHub Page</title>
-    <link rel='stylesheet' type='text/css' href='https://zzhamzazz.github.io/ios.css'/>
     <meta name='viewport' content='width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;'/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
     <style>
-        /* Lightbox styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto;
+            background: linear-gradient(180deg, #0b0f1a, #111827);
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        /* ===== INPUT UI ===== */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        input {
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
+            color: white;
+            outline: none;
+        }
+
+        button {
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #0a84ff, #409cff);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        /* ===== RESULT CARDS ===== */
+        #imageResults, #output {
+            display: none;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 16px;
+
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* ANIMATION CLASS */
+        .show {
+            display: block !important;
+            animation: fadeSlide 0.35s ease forwards;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* IMAGE GRID */
+        #imageResults div {
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 10px;
+        }
+
+        /* LIGHTBOX */
         #lightbox {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
             justify-content: center;
             align-items: center;
+            z-index: 9999;
         }
 
         #lightbox img {
             max-width: 90%;
             max-height: 90%;
-            border-radius: 10px;
+            border-radius: 12px;
         }
 
-        #lightbox:target {
-            display: flex;
+        /* LOADING TEXT */
+        .loading {
+            opacity: 0.7;
+            font-style: italic;
         }
     </style>
 </head>
+
 <body>
 
-    <h2>BCACarImages</h2>
-    <ul>
-        <input type="text" placeholder="Enter Reg..." id="regfield" />
-        <button id="myBtn">Go</button>
-    </ul>
-    <div id="imageResults"></div>
+<!-- PASSWORD LOCK -->
+<script>
+const _p = atob("MTIzNA==");
+const input = prompt("Enter password:");
 
-    <!-- Lightbox container -->
-    <div id="lightbox" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" alt="Full Image">
-    </div>
-
-    <script>
-        document.getElementById("myBtn").addEventListener("click", async function(){
-            var reg = document.getElementById("regfield").value;
-            if (!reg) return alert("Please enter a registration number.");
-            
-            var url = `https://www.bcaimage.com/images/${reg}-gb/beauty,damage`;
-            
-            try {
-                const response = await fetch(url);
-                const htmlText = await response.text();
-
-                // Parse HTML and extract image data
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, "text/html");
-                const gallery = doc.querySelector(".gallery");
-                const images = gallery ? gallery.querySelectorAll(".thumbnail") : [];
-                
-                let outputHTML = "<h3>Vehicle Images</h3><div style='display:flex;flex-wrap:wrap;gap:10px;'>";
-                images.forEach(img => {
-                    const imgTag = img.querySelector("a img");
-                    const dateTag = img.querySelector("span span");
-                    
-                    if (imgTag && dateTag) {
-                        const imgSrc = imgTag.getAttribute("src");
-                        const dateText = dateTag.textContent.trim();
-                        outputHTML += `
-                            <div style='text-align:center;'>
-                                <a href="javascript:void(0)" onclick="openLightbox('${imgSrc}')">
-                                    <img src="${imgSrc}" style="width:200px;border-radius:8px;cursor:pointer;"/>
-                                </a>
-                                <p><strong>${dateText}</strong></p>
-                            </div>
-                        `;
-                    }
-                });
-                outputHTML += "</div>";
-
-                document.getElementById("imageResults").innerHTML = outputHTML || "<p>No images found.</p>";
-            } catch (error) {
-                console.error("Error fetching images:", error);
-                document.getElementById("imageResults").innerHTML = "<p>Failed to load images.</p>";
-            }
-        });
-
-        function openLightbox(imageSrc) {
-    // Remove the `&width=200` query parameter from the image URL
-    const fullImageSrc = imageSrc.replace(/&width=200$/, '');
-    document.getElementById("lightbox-img").src = fullImageSrc;
-    document.getElementById("lightbox").style.display = "flex";
-}
-
-
-
-
-        function closeLightbox() {
-            document.getElementById("lightbox").style.display = "none";
-        }
-    </script>
-
-    <h2>REG 2 VIN</h2>
-    <ul>
-        <input type="text" id="inputText" placeholder="Enter Reg...">
-        <button onclick="executeCurl()">Go</button>
-        <pre id="output"></pre>
-    </ul>
-
-    
-    
-    <script>
-async function executeCurl() {
-    const reg = document.getElementById("inputText").value.trim().toUpperCase();
-    const outputElement = document.getElementById("output");
-
-    if (!reg) {
-        outputElement.textContent = "⚠️ Please enter a registration.";
-        return;
-    }
-
-    outputElement.textContent = "Looking up vehicle...";
-
-    try {
-        const response = await fetch(
-            `https://reg2vin.hamza123.workers.dev?reg=${reg}`
-        );
-
-        if (!response.ok) {
-            throw new Error(`Server returned ${response.status}`);
-        }
-
-        const result = await response.json();
-
-        if (!result.success || !result.data) {
-            throw new Error("Vehicle not found.");
-        }
-
-        const vehicle = result.data;
-
-        outputElement.innerHTML = `
-            ✅ <strong>VIN:</strong> ${vehicle.vin || "N/A"}<br>
-            <strong>Registration:</strong> ${vehicle.reg || reg}<br>
-            <strong>Manufacturer:</strong> ${vehicle.manufacturer || "N/A"}<br>
-            <strong>Model:</strong> ${vehicle.model || "N/A"}<br>
-            <strong>Colour:</strong> ${vehicle.colour || "N/A"}<br>
-            <strong>Fuel:</strong> ${vehicle.fuel || "N/A"}<br>
-            <strong>Year:</strong> ${vehicle.year || "N/A"}
-        `;
-    }
-    catch (error) {
-        outputElement.textContent = "❌ " + error.message;
-    }
+if (input !== _p) {
+    document.body.innerHTML = "<h1 style='text-align:center;margin-top:50px;'>Access Denied</h1>";
 }
 </script>
 
-    <div align='center'>
-        <a href='https://www.free-website-hit-counter.com'>
-            <img src='https://www.free-website-hit-counter.com/zc.php?d=5&id=5858&s=55' border='0' alt='Free Website Hit Counter'>
-        </a>
-        <br />
-    </div>
+<h2>BCACarImages</h2>
+
+<div class="input-group">
+    <input type="text" id="regfield" placeholder="Enter Reg..." />
+    <button id="myBtn">Go</button>
+</div>
+
+<div id="imageResults"></div>
+
+<div id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" />
+</div>
+
+<script>
+function show(el) {
+    el.classList.add("show");
+}
+
+function hide(el) {
+    el.classList.remove("show");
+    el.style.display = "none";
+}
+
+document.getElementById("myBtn").addEventListener("click", async function () {
+    const reg = document.getElementById("regfield").value;
+    const box = document.getElementById("imageResults");
+
+    if (!reg) return alert("Enter registration");
+
+    box.innerHTML = "<p class='loading'>Loading images...</p>";
+    show(box);
+
+    try {
+        const url = `https://www.bcaimage.com/images/${reg}-gb/beauty,damage`;
+        const res = await fetch(url);
+        const html = await res.text();
+
+        const doc = new DOMParser().parseFromString(html, "text/html");
+        const gallery = doc.querySelector(".gallery");
+        const images = gallery ? gallery.querySelectorAll(".thumbnail") : [];
+
+        let out = "<div style='display:flex;flex-wrap:wrap;gap:10px;'>";
+
+        images.forEach(img => {
+            const imgTag = img.querySelector("a img");
+            const dateTag = img.querySelector("span span");
+
+            if (imgTag && dateTag) {
+                const src = imgTag.getAttribute("src");
+                const date = dateTag.textContent.trim();
+
+                out += `
+                <div style="text-align:center;">
+                    <img onclick="openLightbox('${src}')"
+                         src="${src}"
+                         style="width:200px;border-radius:10px;cursor:pointer;">
+                    <p><strong>${date}</strong></p>
+                </div>`;
+            }
+        });
+
+        out += "</div>";
+        box.innerHTML = out || "<p>No images found</p>";
+        show(box);
+
+    } catch (e) {
+        box.innerHTML = "<p>Error loading images</p>";
+        show(box);
+    }
+});
+
+
+function openLightbox(src) {
+    document.getElementById("lightbox-img").src = src.replace("&width=200", "");
+    document.getElementById("lightbox").style.display = "flex";
+}
+
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+}
+</script>
+
+<h2>REG 2 VIN</h2>
+
+<div class="input-group">
+    <input type="text" id="inputText" placeholder="Enter Reg..." />
+    <button onclick="executeCurl()">Go</button>
+</div>
+
+<pre id="output"></pre>
+
+<script>
+async function executeCurl() {
+    const reg = document.getElementById("inputText").value.trim().toUpperCase();
+    const box = document.getElementById("output");
+
+    if (!reg) return;
+
+    box.innerHTML = "Loading vehicle...";
+    show(box);
+
+    try {
+        const res = await fetch(`https://quiet-lake-1010.hsk10.workers.dev/?reg=${reg}`);
+        const data = await res.json();
+
+        const v = data.data;
+
+        box.innerHTML = `
+        <strong>VIN:</strong> ${v.vin || "N/A"}<br>
+        <strong>Reg:</strong> ${v.reg || reg}<br>
+        <strong>Make:</strong> ${v.manufacturer || "N/A"}<br>
+        <strong>Model:</strong> ${v.model || "N/A"}<br>
+        <strong>Colour:</strong> ${v.colour || "N/A"}<br>
+        <strong>Fuel:</strong> ${v.fuel || "N/A"}<br>
+        <strong>Year:</strong> ${v.year || "N/A"}
+        `;
+
+        show(box);
+
+    } catch (e) {
+        box.innerHTML = "Error";
+        show(box);
+    }
+}
+</script>
 
 </body>
 </html>
