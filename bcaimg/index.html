@@ -2,79 +2,167 @@
 <html>
 
 <head>
-    <title>Locked App</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamza's GitHub Page</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
     <meta charset="UTF-8">
+
+    <style>
+        #app {
+            display: none;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto;
+            background: linear-gradient(180deg, #0b0f1a, #111827);
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        input {
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
+            color: white;
+            outline: none;
+        }
+
+        button {
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, #0a84ff, #409cff);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
+
+        #imageResults, #output {
+            display: none;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 14px;
+            margin-bottom: 16px;
+
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .show {
+            display: block !important;
+            animation: fadeSlide 0.35s ease forwards;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #imageResults div {
+            background: rgba(255,255,255,0.05);
+            border-radius: 14px;
+            padding: 10px;
+        }
+
+        #lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+        }
+
+        .loading {
+            opacity: 0.7;
+            font-style: italic;
+        }
+    </style>
 </head>
 
-<body style="margin:0;background:#0b0f1a;color:white;font-family:-apple-system;">
-
-<!-- EMPTY APP CONTAINER (nothing loads initially) -->
-<div id="app"></div>
+<body>
 
 <script>
 (function () {
     const correct = atob("MTIzNA=="); // 1234
     const input = prompt("Enter password:");
 
-    if (input !== correct) {
-        // HARD STOP: do NOT touch existing DOM
+    if (input === correct) {
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("app").style.display = "block";
+        });
+    } else {
         document.body.innerHTML = `
             <div style="
                 height:100vh;
                 display:flex;
                 align-items:center;
                 justify-content:center;
-                font-size:22px;
+                background:#0b0f1a;
+                color:white;
                 font-family:-apple-system;
+                font-size:24px;
             ">
                 Access Denied
             </div>
         `;
-        return;
     }
-
-    // ONLY LOAD APP IF PASSWORD IS CORRECT
-    document.getElementById("app").innerHTML = `
-        <h2>BCACarImages</h2>
-
-        <input id="regfield" placeholder="Enter Reg..." style="
-            width:100%;padding:12px;border-radius:12px;border:none;margin-bottom:10px;
-        ">
-
-        <button onclick="searchImages()" style="
-            width:100%;padding:12px;border-radius:12px;border:none;
-            background:linear-gradient(135deg,#0a84ff,#409cff);
-            color:white;font-weight:600;
-        ">Go</button>
-
-        <div id="imageResults" style="margin-top:15px;"></div>
-
-        <h2>REG 2 VIN</h2>
-
-        <input id="inputText" placeholder="Enter Reg..." style="
-            width:100%;padding:12px;border-radius:12px;border:none;margin-bottom:10px;
-        ">
-
-        <button onclick="executeCurl()" style="
-            width:100%;padding:12px;border-radius:12px;border:none;
-            background:linear-gradient(135deg,#0a84ff,#409cff);
-            color:white;font-weight:600;
-        ">Go</button>
-
-        <pre id="output" style="margin-top:15px;"></pre>
-    `;
 })();
 </script>
 
+<div id="app">
+
+<h2>BCACarImages</h2>
+
+<div class="input-group">
+    <input type="text" id="regfield" placeholder="Enter Reg..." />
+    <button id="myBtn">Go</button>
+</div>
+
+<div id="imageResults"></div>
+
+<div id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" />
+</div>
+
 <script>
-async function searchImages() {
+document.getElementById("myBtn").addEventListener("click", async function(){
     const reg = document.getElementById("regfield").value;
     const box = document.getElementById("imageResults");
 
     if (!reg) return;
 
-    box.innerHTML = "Loading...";
+    box.innerHTML = "<p class='loading'>Loading...</p>";
+    box.style.display = "block";
+    box.classList.add("show");
 
     try {
         const url = `https://www.bcaimage.com/images/${reg}-gb/beauty,damage`;
@@ -84,6 +172,15 @@ async function searchImages() {
         const doc = new DOMParser().parseFromString(html, "text/html");
         const gallery = doc.querySelector(".gallery");
         const images = gallery ? gallery.querySelectorAll(".thumbnail") : [];
+
+        if (!gallery || images.length === 0) {
+            box.innerHTML = `
+                <div style="text-align:center;padding:20px;opacity:0.8;">
+                    🚫 No images found for this registration
+                </div>
+            `;
+            return;
+        }
 
         let out = "<div style='display:flex;flex-wrap:wrap;gap:10px;'>";
 
@@ -97,26 +194,55 @@ async function searchImages() {
 
                 out += `
                 <div style="text-align:center;">
-                    <img src="${src}" style="width:200px;border-radius:10px;">
+                    <img onclick="openLightbox('${src}')"
+                         src="${src}"
+                         style="width:200px;border-radius:10px;cursor:pointer;">
                     <p>${date}</p>
                 </div>`;
             }
         });
 
+        out += "</div>";
         box.innerHTML = out;
 
     } catch (e) {
-        box.innerHTML = "Error loading images";
+        box.innerHTML = `
+            <div style="text-align:center;padding:20px;">
+                ❌ Error loading images
+            </div>
+        `;
     }
+});
+
+function openLightbox(src) {
+    document.getElementById("lightbox-img").src = src.replace("&width=200", "");
+    document.getElementById("lightbox").style.display = "flex";
 }
 
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+}
+</script>
+
+<h2>REG 2 VIN</h2>
+
+<div class="input-group">
+    <input type="text" id="inputText" placeholder="Enter Reg..." />
+    <button onclick="executeCurl()">Go</button>
+</div>
+
+<pre id="output"></pre>
+
+<script>
 async function executeCurl() {
     const reg = document.getElementById("inputText").value.trim().toUpperCase();
     const box = document.getElementById("output");
 
     if (!reg) return;
 
-    box.innerHTML = "Loading...";
+    box.innerHTML = "<p class='loading'>Loading...</p>";
+    box.style.display = "block";
+    box.classList.add("show");
 
     try {
         const res = await fetch(`https://quiet-lake-1010.hsk10.workers.dev/?reg=${reg}`);
@@ -132,12 +258,13 @@ Colour: ${v.colour || "N/A"}<br>
 Fuel: ${v.fuel || "N/A"}<br>
 Year: ${v.year || "N/A"}
         `;
-
     } catch (e) {
         box.innerHTML = "Error";
     }
 }
 </script>
+
+</div>
 
 </body>
 </html>
